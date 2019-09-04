@@ -41,7 +41,7 @@ shape = SubResource( 3 )
 
 [node name="TileRight" type="MeshInstance" parent="."]
 editor/display_folded = true
-transform = Transform( 5, 0, 0, 0, 0.1, 0, 0, 0, 10, 16.511, 0, 0 )
+transform = Transform( 5, 0, 0, 0, 0.1, 0, 0, 0, 10, 15.935, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 5 )
 

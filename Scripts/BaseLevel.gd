@@ -1,10 +1,14 @@
 extends Spatial
 
+var tiles_position_distance = 15.935
+var current_player_position_sum = 0
+
 var tiles_number
 var timer_wait_time
 var tile_speed
 
 var tile_base = preload("res://Scenes/TilesBase.tscn")
+onready var player_tween = get_node("Player/Tween")
 
 var color_pallete = []
 
@@ -102,4 +106,23 @@ func set_tile_speed(speed):
 
 func _on_SwipeDetector_swipe(direction):
 	print(direction)
+	if direction.x == -1:
+		# right
+		if current_player_position_sum <= 0:
+			current_player_position_sum += tiles_position_distance
+			var current_position_vector = $Player.translation
+			print(current_position_vector, current_player_position_sum)
+			player_tween.interpolate_property($Player, "translation", current_position_vector, Vector3(current_player_position_sum, current_position_vector.y, current_position_vector.z), 1.0, Tween.TRANS_BACK, Tween.EASE_OUT)
+			player_tween.start()
+	elif direction.x == 1:
+		# left
+		if current_player_position_sum >= 0:
+			current_player_position_sum -= tiles_position_distance
+			var current_position_vector = $Player.translation
+			print(current_position_vector, current_player_position_sum)
+			player_tween.interpolate_property($Player, "translation", current_position_vector, Vector3(current_player_position_sum, current_position_vector.y, current_position_vector.z), 1.0, Tween.TRANS_BACK, Tween.EASE_OUT)
+			player_tween.start()
+
+func debug_print(data):
+	print(data)
 

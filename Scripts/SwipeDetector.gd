@@ -13,7 +13,7 @@ func _input(event):
 		return
 	if event.pressed:
 		_start_detection(event.position)
-	elif timer.is_stopped():
+	else:
 		_end_detection(event.position)
 
 func _start_detection(position):
@@ -23,8 +23,8 @@ func _start_detection(position):
 func _end_detection(position):
 	timer.stop()
 	var direction = (position - swipe_start_position).normalized()
-	if abs(direction.x) + abs(direction.y) > MAX_DIAGONAL_SLOPE:
-		return
+	#if abs(direction.x) + abs(direction.y) > MAX_DIAGONAL_SLOPE:
+		#return
 	if abs(direction.x) > abs(direction.y):
 		emit_signal("swipe", Vector2(-sign(direction.x), 0.0))
 	else:

@@ -5,9 +5,11 @@
 
 [node name="BaseLevel" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+tile_number = 100
 
 [node name="Camera" parent="." index="0"]
 transform = Transform( 1, 0, 0, 0, 0.897196, 0.441633, 0, -0.441633, 0.897196, 0, 3.852, 0 )
+current = false
 
 [node name="DirectionalLight" parent="." index="1"]
 transform = Transform( -0.206208, -0.881448, -0.424885, 0.970839, -0.130042, -0.201395, 0.122266, -0.454025, 0.88256, 0, 4.32661, 0 )
