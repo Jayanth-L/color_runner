@@ -21,7 +21,7 @@ var pallete = [
 func _physics_process(delta):
 	if $RayCast.is_colliding():
 		if $RayCast.get_collider().get_parent().material_override.albedo_color in pallete:
-			print("Yes")
+			pass
 
 func _ready():
 	randomize()
@@ -30,4 +30,3 @@ func _ready():
 	set_tile_speed(speed)
 	set_number_of_tilesets(tile_number)
 	spawn_tiles(Vector3(0, 0, $Camera.translation.z -200))
-

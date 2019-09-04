@@ -100,3 +100,6 @@ func set_timer_wait_time(time):
 func set_tile_speed(speed):
 	tile_speed = speed
 
+func _on_SwipeDetector_swipe(direction):
+	print(direction)
+

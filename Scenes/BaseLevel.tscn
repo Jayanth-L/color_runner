@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/SwipeDetector.tscn" type="PackedScene" id=2]
 
 [node name="BaseLevel" type="Spatial"]
 
@@ -16,3 +17,5 @@ transform = Transform( 1, 0, 0, 0, 0.54245, 0.840088, 0, -0.840088, 0.54245, 0, 
 
 [node name="TilesSpawnPosition" type="Position3D" parent="Player"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.00407e-05, 7.62939e-06 )
+
+[node name="SwipeDetector" parent="." instance=ExtResource( 2 )]
