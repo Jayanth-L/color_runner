@@ -3,6 +3,10 @@ extends Spatial
 var tiles_position_distance = 15.935
 var current_player_position_sum = 0
 
+var PLAYER_Y_HEIGHT = 4
+
+var is_player_up = false
+
 var tiles_number
 var timer_wait_time
 var tile_speed
@@ -106,22 +110,36 @@ func set_tile_speed(speed):
 
 func _on_SwipeDetector_swipe(direction):
 	print(direction)
-	if direction.x == -1:
-		# right
-		if current_player_position_sum <= 0:
-			current_player_position_sum += tiles_position_distance
-			var current_position_vector = $Player.translation
-			print(current_position_vector, current_player_position_sum)
-			player_tween.interpolate_property($Player, "translation", current_position_vector, Vector3(current_player_position_sum, current_position_vector.y, current_position_vector.z), 1.0, Tween.TRANS_BACK, Tween.EASE_OUT)
-			player_tween.start()
-	elif direction.x == 1:
-		# left
-		if current_player_position_sum >= 0:
-			current_player_position_sum -= tiles_position_distance
-			var current_position_vector = $Player.translation
-			print(current_position_vector, current_player_position_sum)
-			player_tween.interpolate_property($Player, "translation", current_position_vector, Vector3(current_player_position_sum, current_position_vector.y, current_position_vector.z), 1.0, Tween.TRANS_BACK, Tween.EASE_OUT)
-			player_tween.start()
+	if direction.y == 0:
+		if direction.x == -1:
+			# right
+			if current_player_position_sum <= 0:
+				current_player_position_sum += tiles_position_distance
+		elif direction.x == 1:
+			# left
+			if current_player_position_sum >= 0:
+				current_player_position_sum -= tiles_position_distance
+	
+		var current_position_vector = $Player.translation
+		print(current_position_vector, current_player_position_sum)
+		player_tween.interpolate_property($Player, "translation", current_position_vector, Vector3(current_player_position_sum, current_position_vector.y, current_position_vector.z), 0.5, Tween.TRANS_BACK, Tween.EASE_OUT)
+		player_tween.start()
+	elif direction.x == 0:
+		var current_position_vector = $Player.translation
+		if direction.y == 1:
+			# up
+			if not is_player_up:
+				is_player_up = true
+				player_tween.interpolate_property($Player, "translation", current_position_vector, Vector3(current_position_vector.x, $PlayerInitialPosition.translation.y + PLAYER_Y_HEIGHT, current_position_vector.z), 0.5, Tween.TRANS_BACK, Tween.EASE_OUT)
+				player_tween.start()
+			pass
+		elif direction.y == -1:
+			# down
+			if is_player_up:
+				is_player_up = false
+				player_tween.interpolate_property($Player, "translation", current_position_vector, Vector3(current_position_vector.x, $PlayerInitialPosition.translation.y, current_position_vector.z), 0.5, Tween.TRANS_BACK, Tween.EASE_OUT)
+				player_tween.start()
+			pass
 
 func debug_print(data):
 	print(data)
